@@ -4,16 +4,36 @@ Colección de programas en Python para la calculadora **Casio FX-CG100**, pensad
 
 Cada script pide los datos por consola, calcula y muestra el resultado en pantalla. El objetivo es tener en la calculadora las mismas herramientas que se usan en clase y en exámenes, sin depender de hojas de cálculo.
 
-## Cómo usar los scripts
+## Cómo pasar un script a la calculadora
 
-1. Copia el archivo `.py` a la calculadora (USB o software de transferencia de Casio).
-2. En la FX-CG100 abre **Python** y ejecuta el script.
-3. Elige la opción del menú (si la hay) e introduce los datos cuando se pidan.
-4. Lee los resultados en pantalla. Las unidades coinciden con las del enunciado (SI: m, m³/s, etc.).
+1. Conecta la FX-CG100 al PC por USB. En la pantalla de la calculadora elige el modo **USB Flash Drive** (memoria de almacenamiento); aparecerá como una unidad extraíble de unos 4,5 MB.
+2. Copia el archivo `.py` **a la raíz** de esa unidad. La app Python solo lista los archivos de la raíz: si lo dejas dentro de una carpeta, no lo verás.
 
-Notas:
+   En Linux, con la calculadora montada en `/media/$USER/disk`:
+
+   ```bash
+   cp "DISEÑO DE CANALES/froude.py" /media/$USER/disk/
+   rm -rf /media/$USER/disk/.Trash-1000   # el gestor de archivos deja basura al borrar
+   sync && gio mount -u /media/$USER/disk # expulsar de forma segura
+   ```
+
+3. Desconecta el USB y sal del modo memoria en la calculadora.
+4. Abre el menú **Python**, sitúate sobre el archivo y pulsa `EXE` para abrirlo, luego `F1` (RUN) para ejecutarlo.
+5. Introduce los datos cuando se pidan y lee los resultados en pantalla.
+
+### Requisitos para que el script funcione en la calculadora
+
+Estas cuatro reglas son la causa habitual de que un script "no se ejecute":
+
+- **Solo ASCII.** Nada de tildes ni `ñ`, tampoco en los comentarios. El intérprete de Casio es MicroPython y falla al abrir archivos con caracteres acentuados. Escribe `Calculos`, `seccion`, `regimen`.
+- **Nombre corto.** Máximo 8 caracteres antes del `.py`, sin espacios ni acentos (`froude.py`, no `froude_casio_v2.py`).
+- **En la raíz** de la memoria de almacenamiento, nunca en subcarpetas.
+- **Archivo guardado.** Comprueba que no pesa 0 bytes (`ls -l`); un buffer sin guardar en el editor copia un archivo vacío.
+
+Otras notas de uso:
 
 - Usa punto decimal (`1.6`, no `1,6`).
+- Unidades del SI: m, m³/s, m/s.
 - Si un dato no aplica a esa geometría, el script no lo pide.
 - Los scripts son independientes: puedes llevar solo los que necesites.
 
@@ -25,7 +45,7 @@ Los archivos se agrupan por tema, no por número de práctica. Así se pueden a�
 scripts/
 ├── README.md
 ├── DISEÑO DE CANALES/
-│   └── froude_casio.py
+│   └── froude.py
 ├── HIDRÁULICA/
 │   └── (próximos)
 └── ESTRUCTURAS/
@@ -44,11 +64,11 @@ Nombres de archivo en `snake_case`, en minúsculas, con extensión `.py`.
 
 | Tema | Script | Qué calcula |
 |------|--------|-------------|
-| Diseño de canales | [`froude_casio.py`](DISEÑO%20DE%20CANALES/froude_casio.py) | Número de Froude y régimen del flujo (subcrítico / crítico / supercrítico) para sección rectangular, trapezoidal, triangular o circular |
+| Diseño de canales | [`froude.py`](DISEÑO%20DE%20CANALES/froude.py) | Número de Froude y régimen del flujo (subcrítico / crítico / supercrítico) para sección rectangular, trapezoidal, triangular o circular |
 
 ## Descripción de scripts
 
-### `froude_casio.py` — Régimen de flujo (Froude)
+### `froude.py` — Régimen de flujo (Froude)
 
 Determina si el flujo en un canal es **subcrítico** (`Fr < 1`), **crítico** (`Fr = 1`) o **supercrítico** (`Fr > 1`).
 
