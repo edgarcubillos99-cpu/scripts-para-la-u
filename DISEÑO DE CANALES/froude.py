@@ -9,17 +9,17 @@ def froude_solver():
 
     tipo = input("Seccion (1-4): ")
 
-    Q = float(input("Caudal Q: "))
-    y = float(input("Tirante y: "))
+    Q = float(input("Caudal Q (m3/s): "))
+    y = float(input("Tirante y (m): "))
     g = 9.81
 
     # Manejo de condicionales segun el tipo de seccion
     if tipo == '1':
-        b = float(input("Ancho b: "))
+        b = float(input("Ancho b (m): "))
         A = b * y
         T = b
     elif tipo == '2':
-        b = float(input("Ancho b: "))
+        b = float(input("Ancho b (m): "))
         z = float(input("Talud z: "))
         A = (b + z * y) * y
         T = b + 2 * z * y
@@ -28,7 +28,7 @@ def froude_solver():
         A = z * (y ** 2)
         T = 2 * z * y
     elif tipo == '4':
-        d0 = float(input("Diametro d0: "))
+        d0 = float(input("Diametro d0 (m): "))
         r = d0 / 2
         # Control de desbordamiento para tuberias llenas
         if y > d0:

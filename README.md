@@ -18,7 +18,7 @@ Cada script pide los datos por consola, calcula y muestra el resultado en pantal
    ```
 
 3. Desconecta el USB y sal del modo memoria en la calculadora.
-4. Abre el menú **Python**, sitúate sobre el archivo y pulsa `EXE` para abrirlo, luego `F1` (RUN) para ejecutarlo.
+4. Abre el menú **Python**, sitúate sobre el archivo y pulsa `tools` --> `file` --> `open` para seleccionar el archivo y abrirlo, luego `tools` --> `Run` para ejecutarlo.
 5. Introduce los datos cuando se pidan y lee los resultados en pantalla.
 
 ### Requisitos para que el script funcione en la calculadora
@@ -33,8 +33,7 @@ Estas cuatro reglas son la causa habitual de que un script "no se ejecute":
 Otras notas de uso:
 
 - Usa punto decimal (`1.6`, no `1,6`).
-- Unidades del SI: m, m³/s, m/s.
-- Si un dato no aplica a esa geometría, el script no lo pide.
+- Unidades del SI: m, m³/s, m/s. (se recomienda para que todos los scripts concuerden)
 - Los scripts son independientes: puedes llevar solo los que necesites.
 
 ## Organización
@@ -71,6 +70,8 @@ Nombres de archivo en `snake_case`, en minúsculas, con extensión `.py`.
 ### `froude.py` — Régimen de flujo (Froude)
 
 Determina si el flujo en un canal es **subcrítico** (`Fr < 1`), **crítico** (`Fr = 1`) o **supercrítico** (`Fr > 1`).
+
+Los canales son tipicos, osea simetricos. No usar si por ejemplo el objetivo es un trapezoidal o triangular con dos pendientes(z) diferentes.
 
 **Datos según la sección**
 
