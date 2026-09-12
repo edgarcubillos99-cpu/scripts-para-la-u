@@ -1,91 +1,169 @@
-# Scripts Casio FX-CG100 — Ingeniería civil
+<h1 align="center">🧮 Scripts Casio FX-CG100 — Ingeniería civil</h1>
 
-Colección de programas en Python para la calculadora **Casio FX-CG100**, pensados para cálculos de carrera: hidráulica, canales, estructuras y demás asignaturas.
+<p align="center">
+  Programas en Python para la calculadora <b>Casio FX-CG100</b>:<br>
+  hidráulica, canales, estructuras y demás asignaturas de la carrera.
+</p>
 
-Cada script pide los datos por consola, calcula y muestra el resultado en pantalla. El objetivo es tener en la calculadora las mismas herramientas que se usan en clase y en exámenes, sin depender de hojas de cálculo.
+<p align="center">
+  <img alt="Python" src="https://img.shields.io/badge/MicroPython-Casio%20FX--CG100-blue?logo=python&logoColor=white">
+  <img alt="Scripts" src="https://img.shields.io/badge/scripts-2-success">
+  <img alt="Temas" src="https://img.shields.io/badge/temas-canales%20%7C%20hidr%C3%A1ulica%20%7C%20estructuras-lightgrey">
+</p>
 
-## Cómo pasar un script a la calculadora
+---
 
-1. Conecta la FX-CG100 al PC por USB. En la pantalla de la calculadora elige el modo **USB Flash Drive** (memoria de almacenamiento); aparecerá como una unidad extraíble de unos 4,5 MB.
-2. Copia el archivo `.py` **a la raíz** de esa unidad. La app Python solo lista los archivos de la raíz: si lo dejas dentro de una carpeta, no lo verás.
+## 📋 Índice
 
-   En Linux, con la calculadora montada en `/media/$USER/disk`:
+- 🔎 [Descripción general](#-descripción-general)
+- 🚀 [Cómo pasar un script a la calculadora](#-cómo-pasar-un-script-a-la-calculadora)
+- 📐 [Requisitos y notas de uso](#-requisitos-y-notas-de-uso)
+- 📁 [Organización del repositorio](#-organización-del-repositorio)
+- 📚 [Catálogo de scripts](#-catálogo-de-scripts)
+- 📌 [Descripción de scripts](#-descripción-de-scripts)
+- 💡 [Cómo añadir un script nuevo](#-cómo-añadir-un-script-nuevo)
 
-   ```bash
-   cp "DISEÑO DE CANALES/froude.py" /media/$USER/disk/
-   rm -rf /media/$USER/disk/.Trash-1000   # el gestor de archivos deja basura al borrar
-   sync && gio mount -u /media/$USER/disk # expulsar de forma segura
-   ```
+---
 
-3. Desconecta el USB y sal del modo memoria en la calculadora.
-4. Abre el menú **Python**, sitúate sobre el archivo y pulsa `tools` --> `file` --> `open` para seleccionar el archivo y abrirlo, luego `tools` --> `Run` para ejecutarlo.
-5. Introduce los datos cuando se pidan y lee los resultados en pantalla.
+## 🔎 Descripción general
 
-### Requisitos para que el script funcione en la calculadora
+Cada script pide los datos por consola, calcula y muestra el resultado en pantalla.
 
-Estas cuatro reglas son la causa habitual de que un script "no se ejecute":
+El objetivo es tener en la calculadora las mismas herramientas que se usan en clase y en exámenes, sin depender de hojas de cálculo.
 
-- **Solo ASCII.** Nada de tildes ni `ñ`, tampoco en los comentarios. El intérprete de Casio es MicroPython y falla al abrir archivos con caracteres acentuados. Escribe `Calculos`, `seccion`, `regimen`.
-- **Nombre corto.** Máximo 8 caracteres antes del `.py`, sin espacios ni acentos (`froude.py`, no `froude_casio_v2.py`).
-- **En la raíz** de la memoria de almacenamiento, nunca en subcarpetas.
-- **Archivo guardado.** Comprueba que no pesa 0 bytes (`ls -l`); un buffer sin guardar en el editor copia un archivo vacío.
+| | |
+|---|---|
+| 🎯 **Uso** | Cálculos de carrera directamente en la FX-CG100 |
+| 🐍 **Lenguaje** | MicroPython (intérprete Python de Casio) |
+| 💾 **Memoria** | Los `.py` van a la *Storage Memory* (~4,5 MB) |
+| 🧩 **Dependencias** | Ninguna: cada script es independiente |
 
-Otras notas de uso:
+---
 
-- Usa punto decimal (`1.6`, no `1,6`).
-- Unidades del SI: m, m³/s, m/s. (se recomienda para que todos los scripts concuerden)
-- Los scripts son independientes: puedes llevar solo los que necesites.
+## 🚀 Cómo pasar un script a la calculadora
 
-## Organización
+**1. Conectar** la FX-CG100 al PC por USB. En la pantalla de la calculadora elige el modo **USB Flash Drive** (memoria de almacenamiento); aparecerá como una unidad extraíble de unos 4,5 MB.
+
+**2. Copiar** el archivo `.py` **a la raíz** de esa unidad. La app Python solo lista los archivos de la raíz: si lo dejas dentro de una carpeta, no lo verás.
+
+En Linux, con la calculadora montada en `/media/$USER/disk`:
+
+```bash
+cp "DISEÑO DE CANALES/froude.py" /media/$USER/disk/
+rm -rf /media/$USER/disk/.Trash-1000   # el gestor de archivos deja basura al borrar
+sync && gio mount -u /media/$USER/disk # expulsar de forma segura
+```
+
+**3. Desconectar** el USB y salir del modo memoria en la calculadora.
+
+**4. Ejecutar:** abre el menú **Python**, sitúate sobre el archivo y pulsa `tools` → `file` → `open` para abrirlo, luego `tools` → `Run`.
+
+**5. Introducir** los datos cuando se pidan y leer los resultados en pantalla.
+
+---
+
+## 📐 Requisitos y notas de uso
+
+> [!IMPORTANT]
+> Estas cuatro reglas son la causa habitual de que un script "no se ejecute".
+
+| | Regla | Detalle |
+|---|---|---|
+| 🔤 | **Solo ASCII** | Nada de tildes ni `ñ`, tampoco en los comentarios. MicroPython de Casio falla al abrir archivos con caracteres acentuados. Escribe `Calculos`, `seccion`, `regimen` |
+| ✂️ | **Nombre corto** | Máximo 8 caracteres antes del `.py`, sin espacios ni acentos (`froude.py`, no `froude_casio_v2.py`) |
+| 📂 | **En la raíz** | De la memoria de almacenamiento, nunca en subcarpetas |
+| 💾 | **Archivo guardado** | Comprueba que no pesa 0 bytes (`ls -l`); un buffer sin guardar en el editor copia un archivo vacío |
+
+> [!TIP]
+> Otras notas:
+> - Usa punto decimal (`1.6`, no `1,6`).
+> - Unidades del SI: m, m³/s, m/s (se recomienda para que todos los scripts concuerden).
+> - Los scripts son independientes: puedes llevar solo los que necesites.
+> - La app **Memory** solo muestra 200 archivos por carpeta: ese es el tope práctico de scripts en la raíz.
+
+---
+
+## 📁 Organización del repositorio
 
 Los archivos se agrupan por tema, no por número de práctica. Así se pueden añadir scripts sin reestructurar el repositorio:
 
 ```text
-scripts/
-├── README.md
-├── DISEÑO DE CANALES/
-│   └── froude.py
-├── HIDRÁULICA/
-│   └── (próximos)
-└── ESTRUCTURAS/
-    └── (próximos)
+scripts-para-la-u/
+├── README.md                 → esta documentación
+├── DISEÑO DE CANALES/        → flujo en canales abiertos
+│   ├── froude.py             → número de Froude y régimen del flujo
+│   └── E_especifica.py       → curva de energía específica (E-y)
+├── HIDRÁULICA/               → (próximos)
+└── ESTRUCTURAS/              → (próximos)
 ```
-
-Para publicar uno nuevo:
-
-1. Colócalo en la carpeta del tema (crea la carpeta si no existe).
-2. Añade una fila en la tabla de [Catálogo](#catálogo).
-3. Si hace falta, escribe un párrafo corto en [Descripción de scripts](#descripción-de-scripts).
 
 Nombres de archivo en `snake_case`, en minúsculas, con extensión `.py`.
 
-## Catálogo
+---
 
-| Tema | Script | Qué calcula |
-|------|--------|-------------|
-| Diseño de canales | [`froude.py`](DISEÑO%20DE%20CANALES/froude.py) | Número de Froude y régimen del flujo (subcrítico / crítico / supercrítico) para sección rectangular, trapezoidal, triangular o circular |
+## 📚 Catálogo de scripts
 
-## Descripción de scripts
-
-### `froude.py` — Régimen de flujo (Froude)
-
-Determina si el flujo en un canal es **subcrítico** (`Fr < 1`), **crítico** (`Fr = 1`) o **supercrítico** (`Fr > 1`).
-
-Los canales son tipicos, osea simetricos. No usar si por ejemplo el objetivo es un trapezoidal o triangular con dos pendientes(z) diferentes.
-
-**Datos según la sección**
-
-| Sección | Datos que pide |
-|---------|----------------|
-| Rectangular | Caudal `Q`, tirante `y`, ancho de solera `b` |
-| Trapezoidal | `Q`, `y`, `b`, talud `z` (horizontal:vertical) |
-| Triangular | `Q`, `y`, talud `z` |
-| Circular | `Q`, `y`, diámetro `d0` |
-
-**Salida:** área `A`, ancho superficial `T`, profundidad hidráulica `D = A/T`, velocidad `V = Q/A` y número de Froude `Fr = V / √(gD)` con `g = 9.81 m/s²`.
-
-Si en sección circular el tirante supera el diámetro, avisa de flujo a presión y termina.
+| 🗂 Tema | 📄 Script | ⚙️ Qué calcula |
+|---------|-----------|----------------|
+| 🌊 Diseño de canales | [`froude.py`](DISEÑO%20DE%20CANALES/froude.py) | Número de Froude y régimen del flujo (subcrítico / crítico / supercrítico) para sección rectangular, trapezoidal, triangular o circular |
+| 🌊 Diseño de canales | [`E_especifica.py`](DISEÑO%20DE%20CANALES/E_especifica.py) | Tabla de energía específica `E` frente al tirante `y` (curva E–y) para sección rectangular, trapezoidal, triangular o circular |
 
 ---
 
-Al añadir el siguiente script, copia el formato de la fila del catálogo y, si el uso no es obvio, un apartado como el de arriba.
+## 📌 Descripción de scripts
+
+### 🌊 `froude.py` — Régimen de flujo (Froude)
+
+Determina si el flujo en un canal es **subcrítico** (`Fr < 1`), **crítico** (`Fr = 1`) o **supercrítico** (`Fr > 1`).
+
+> [!WARNING]
+> Los canales son tipicos, osea simetricos. No usar si por ejemplo el objetivo es un trapezoidal o triangular con dos pendientes (`z`) diferentes.
+
+**📥 Datos según la sección**
+
+| Sección | Datos que pide |
+|---------|----------------|
+| ▭ Rectangular | Caudal `Q`, tirante `y`, ancho de solera `b` |
+| ⏢ Trapezoidal | `Q`, `y`, `b`, talud `z` (horizontal:vertical) |
+| 🔻 Triangular | `Q`, `y`, talud `z` |
+| ⭕ Circular | `Q`, `y`, diámetro `d0` |
+
+**📤 Salida:** área `A`, ancho superficial `T`, profundidad hidráulica `D = A/T`, velocidad `V = Q/A` y número de Froude `Fr = V / √(gD)` con `g = 9.81 m/s²`.
+
+**🚧 Aviso:** si en sección circular el tirante supera el diámetro, avisa de flujo a presión y termina.
+
+<br>
+
+### 🌊 `E_especifica.py` — Curva de energía específica
+
+Genera una **tabla de puntos** de la curva energía específica–tirante (`E`–`y`) para un caudal fijo. Sirve para dibujar a mano o localizar el mínimo de `E` (tirante crítico) mirando los valores.
+
+> [!WARNING]
+> Los canales son tipicos, osea simetricos. No usar si por ejemplo el objetivo es un trapezoidal o triangular con dos pendientes (`z`) diferentes.
+
+**📥 Datos según la sección**
+
+| Sección | Datos que pide |
+|---------|----------------|
+| ▭ Rectangular | Caudal `Q`, ancho de solera `b` |
+| ⏢ Trapezoidal | `Q`, `b`, talud `z` (horizontal:vertical) |
+| 🔻 Triangular | `Q`, talud `z` |
+| ⭕ Circular | `Q`, diámetro `d0` |
+
+Después pide el **rango de la gráfica**: tirante inicial `y`, tirante final y tamaño del paso. Recorre ese intervalo y, para cada `y`, calcula el área `A` y la energía específica.
+
+**📤 Salida:** columnas `y (m)` y `E (m)`, con `E = y + Q² / (2 g A²)` y `g = 9.81 m/s²`.
+
+**🚧 Aviso:** si en sección circular el tirante llega al diámetro, imprime `Tubo Lleno` en esa fila y sigue con el siguiente paso.
+
+> [!NOTE]
+> En la calculadora el nombre supera 8 caracteres: al copiarlo a la raíz, renómbralo a algo corto (`energia.py`, `Espec.py`).
+
+---
+
+## 💡 Cómo añadir un script nuevo
+
+1. 📁 Colócalo en la carpeta del tema (crea la carpeta si no existe).
+2. 📚 Añade una fila en la tabla de [Catálogo de scripts](#-catálogo-de-scripts).
+3. 🌊 Si el uso no es obvio, escribe un apartado en [Descripción de scripts](#-descripción-de-scripts).
+4. 📐 Repasa los [requisitos](#-requisitos-y-notas-de-uso) antes de pasarlo a la calculadora.
